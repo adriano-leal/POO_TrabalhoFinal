@@ -74,6 +74,7 @@ public class Jogo extends Application {
         tab.setVgap(10);
         tab.setPadding(new Insets(25, 25, 25, 25));
 
+        
         // Cria os botoes das cartas
         for (int lin = 0; lin < ControleDeJogadas.NLIN; lin++) {
             for (int col = 0; col < ControleDeJogadas.NCOL; col++) {
@@ -83,6 +84,8 @@ public class Jogo extends Application {
                 tab.add(bt, col, lin);
             }
         }
+
+        
 
        // Linha para exibir os pontos humano
         HBox lin1 = new HBox(10);
@@ -94,10 +97,10 @@ public class Jogo extends Application {
        
 
         //monta a cena com uma caixa vertical
-        VBox cena = new VBox();
-        cena.getChildren().addAll(lin1);
-        cena.getChildren().addAll(tab);
-    
+       // VBox cena = new VBox();
+        //cena.getChildren().addAll(lin1);
+        //cena.getChildren().addAll(tab);
+         
 
         // Monta a cena e exibe
         Scene scene = new Scene(tab);
