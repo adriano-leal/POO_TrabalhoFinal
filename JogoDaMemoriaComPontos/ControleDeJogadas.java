@@ -52,18 +52,29 @@ public class ControleDeJogadas {
     }
 
     public GameState setCarta(Carta carta){
+        String cartaCoringa = "img5";
+        String cartaAzar="img6";
         if (carta1 == null){
             this.carta1 = carta;
             memoriaComputador.memoriza(carta);
             return GameState.ABRIU_CARTA1;
-        }else{
+        }else {
             this.carta2 = carta;
             if (carta1.matches(carta2)){
                 memoriaComputador.removeDaMemoria(carta1);
                 carta1.tiraDoJogo();
                 carta2.tiraDoJogo();
-                pontosHumano += carta1.calculaPontosPro(carta2);
-                pontosComputador -= carta1.calculaPontosContra(carta2);
+                if (carta1.getNomeFigura().equals(cartaCoringa)){
+                    pontosHumano += carta1.calculaPontoExtra(carta2);
+                    pontosComputador -= carta1.calculaPontosContra(carta2);
+                } else if(carta1.getNomeFigura().equals(cartaAzar)){
+                    pontosHumano += carta1.calculaPontoAzar(carta2);
+                    pontosComputador -= carta1.calculaPontosContra(carta2); //ver aqui
+                }
+                 else {
+                    pontosHumano += carta1.calculaPontosPro(carta2);
+                    pontosComputador -= carta1.calculaPontosContra(carta2);
+                }
                 carta1 = null;
                 carta2 = null;
                 qtdadePares--;
@@ -71,17 +82,18 @@ public class ControleDeJogadas {
                     return GameState.FIMDEPARTIDA;
                 }else{
                     return GameState.ACHOU_PAR;
-                }
-            }else{
+                } 
+            }else {
                 memoriaComputador.memoriza(carta);
                 carta1.fecha();
                 carta2.fecha();
                 carta1 = null;
                 carta2 = null;
                 return GameState.NAO_ACHOU_PAR;
+                }
             }
         }
-    } 
+     
 
     public Carta primeiraCartaComputador(){
         cartaC1 =  memoriaComputador.getPrimeiraCarta();

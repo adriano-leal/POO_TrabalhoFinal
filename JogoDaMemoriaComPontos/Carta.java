@@ -22,6 +22,10 @@ public abstract class Carta extends Button{
     // Retorna quantos pontos o adversário perde
     public abstract int calculaPontosContra(Carta outra);
     // Define a imagem da carta conforme seu estado interno
+    public abstract int calculaPontoExtra(Carta outra);
+    //Calcula os pontos das cartas especiais "Coringa" 
+    public abstract int calculaPontoAzar(Carta outra);
+    //Calcula os pontos das cartas especiais "Azar"
     public abstract void defineImagem();
 }
 
