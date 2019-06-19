@@ -1,5 +1,5 @@
 
-import javafx.scene.control.TextField;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,17 +9,20 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 
 public class Jogo extends Application {
     public static final int CARD_WIDTH = 70;
@@ -30,6 +33,7 @@ public class Jogo extends Application {
     private Carta cartaCorrente, ultimaCartaAberta;
     private Carta primCartaComp,segCartaComp;
     private TextField tfPontosHumano;
+   
 
     public static void main(String[] args) {
         launch(args);
@@ -56,11 +60,15 @@ public class Jogo extends Application {
         }
     }
 
+    public void restart(Stage stage) {
+        start(stage);
+    }
+    
     @Override
     public void start(Stage primaryStage) {
         // Carrega imagens
         loadImagens();
-
+        
         // Cria o controle do jogo
         cJog = new ControleDeJogadas();
         ultimaCartaAberta = null;
@@ -85,25 +93,44 @@ public class Jogo extends Application {
             }
         }
 
-        
-
-       // Linha para exibir os pontos humano
+        // Linha para exibir os pontos humano
         HBox lin1 = new HBox(10);
         lin1.getChildren().add(new Label("Pontos humano: "));
         tfPontosHumano = new TextField("5");
-       tfPontosHumano.setText(""+cJog.getPontosHumano());
+        tfPontosHumano.setText(""+cJog.getPontosHumano());
         tfPontosHumano.setEditable(false);
-       lin1.getChildren().add(tfPontosHumano);
-       
+        lin1.getChildren().add(tfPontosHumano);
 
+        /* Linha para exibir os pontos computador
+        HBox lin2 = new HBox(10);
+        lin2.getChildren().add(new Label("Pontos computador: "));
+        TextField tfPontosComputador = new TextField("5");
+        tfPontosComputador.setText(""+cJog.getPontosComputador());
+        tfPontosComputador.setEditable(false);
+        lin2.getChildren().add(tfPontosComputador);
+        */
+       
         //monta a cena com uma caixa vertical
-       // VBox cena = new VBox();
-        //cena.getChildren().addAll(lin1);
-        //cena.getChildren().addAll(tab);
-         
+        VBox cena = new VBox();
+        
+        Label label = new Label ("Teste de label");
+        cena.getChildren().add(label);
+
+        Button button = new Button ("Reiniciar");
+        button.setOnAction(e -> {
+            restart(primaryStage);
+        });
+        cena.getChildren().add(button);
+
+        TextField text = new TextField("Teste de texto");
+        cena.getChildren().add(text);
+
+        cena.getChildren().addAll(lin1);
+        //cena.getChildren().addAll(lin2);
+        cena.getChildren().addAll(tab);
 
         // Monta a cena e exibe
-        Scene scene = new Scene(tab);
+        Scene scene = new Scene(cena);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -157,7 +184,7 @@ public class Jogo extends Application {
             break;
         case FIMDEPARTIDA:
             String str = "Humano: "+cJog.getPontosHumano()+" pontos\n";
-            str += "Computador: "+cJog.getPontosComputador()+" pontos";
+            str += "Computador: "+cJog.getPontosComputador()+" pontos\n";
             Alert msgBox = new Alert(AlertType.INFORMATION);
             msgBox.setHeaderText("Fim de Jogo");
             msgBox.setContentText(str);
