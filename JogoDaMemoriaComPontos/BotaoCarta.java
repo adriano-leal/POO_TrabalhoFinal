@@ -77,16 +77,6 @@ public class BotaoCarta extends Carta {
         return 0;
     }
 
-    @Override
-    public int calculaPontoExtra(Carta outra){
-        return 2;
-    }
-
-    @Override
-    public int calculaPontoAzar(Carta outra){
-        return -1;
-    }
-
     public void defineImagem(){
         ImageView iVaux = null;
         String imgName = null;

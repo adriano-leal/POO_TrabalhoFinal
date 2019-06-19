@@ -25,8 +25,10 @@ public class ControleDeJogadas {
         cartas = new ArrayList<>();
         for(int i=1;i<=NUMPARES;i++){
             cartas.add(new BotaoCarta("img"+i));
-            cartas.add(new BotaoCarta("img"+i));
+            cartas.add(new BotaoCarta("img" + i));
         }
+        //cartas.add(new BotaoCartaCoringa("img5"));
+        cartas.add(new BotaoCartaAzar());
         // Embaralha as cartas
         Collections.shuffle(cartas);
 
@@ -52,8 +54,6 @@ public class ControleDeJogadas {
     }
 
     public GameState setCarta(Carta carta){
-        String cartaCoringa = "img5";
-        String cartaAzar="img6";
         if (carta1 == null){
             this.carta1 = carta;
             memoriaComputador.memoriza(carta);
@@ -64,17 +64,8 @@ public class ControleDeJogadas {
                 memoriaComputador.removeDaMemoria(carta1);
                 carta1.tiraDoJogo();
                 carta2.tiraDoJogo();
-                if (carta1.getNomeFigura().equals(cartaCoringa)){
-                    pontosHumano += carta1.calculaPontoExtra(carta2);
-                    pontosComputador -= carta1.calculaPontosContra(carta2);
-                } else if(carta1.getNomeFigura().equals(cartaAzar)){
-                    pontosHumano += carta1.calculaPontoAzar(carta2);
-                    pontosComputador -= carta1.calculaPontosContra(carta2); //ver aqui
-                }
-                 else {
-                    pontosHumano += carta1.calculaPontosPro(carta2);
-                    pontosComputador -= carta1.calculaPontosContra(carta2);
-                }
+                pontosHumano += carta1.calculaPontosPro(carta2);
+                pontosComputador -= carta1.calculaPontosContra(carta2);
                 carta1 = null;
                 carta2 = null;
                 qtdadePares--;

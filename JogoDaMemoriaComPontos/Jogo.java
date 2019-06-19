@@ -101,15 +101,14 @@ public class Jogo extends Application {
         tfPontosHumano.setEditable(false);
         lin1.getChildren().add(tfPontosHumano);
 
-        /* Linha para exibir os pontos computador
+        /* Linha para exibir os pontos computador*/
         HBox lin2 = new HBox(10);
         lin2.getChildren().add(new Label("Pontos computador: "));
         TextField tfPontosComputador = new TextField("5");
         tfPontosComputador.setText(""+cJog.getPontosComputador());
         tfPontosComputador.setEditable(false);
         lin2.getChildren().add(tfPontosComputador);
-        */
-       
+        
         //monta a cena com uma caixa vertical
         VBox cena = new VBox();
         
@@ -126,7 +125,7 @@ public class Jogo extends Application {
         cena.getChildren().add(text);
 
         cena.getChildren().addAll(lin1);
-        //cena.getChildren().addAll(lin2);
+        cena.getChildren().addAll(lin2);
         cena.getChildren().addAll(tab);
 
         // Monta a cena e exibe
