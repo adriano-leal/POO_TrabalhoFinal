@@ -28,7 +28,7 @@ public class ControleDeJogadas {
             cartas.add(new BotaoCarta("img" + i));
         }
         //cartas.add(new BotaoCartaCoringa("img5"));
-        cartas.add(new BotaoCartaAzar());
+        //cartas.add(new BotaoCartaAzar());
         // Embaralha as cartas
         Collections.shuffle(cartas);
 
